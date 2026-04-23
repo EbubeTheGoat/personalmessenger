@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UpToDate | Register for Updates</title>
+    <meta
+      name="description"
+      content="Register for early updates from UpToDate."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              glass: {
+                black: "#000000",
+                panel: "#0a0a0a",
+                line: "rgba(255,255,255,0.14)",
+                soft: "rgba(255,255,255,0.72)",
+              },
+            },
+            fontFamily: {
+              display: ["Playfair Display", "serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            boxShadow: {
+              halo: "0 0 120px rgba(255,255,255,0.08)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      body {
+        background:
+          radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent 28%),
+          radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.06), transparent 22%),
+          linear-gradient(135deg, #000 0%, #040404 48%, #0a0a0a 100%);
+      }
+
+      .glass-grid {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 64px 64px;
+      }
+
+      .wireframe {
+        animation: drift 10s ease-in-out infinite;
+      }
+
+      .wireframe-secondary {
+        animation: drift-alt 12s ease-in-out infinite;
+      }
+
+      .spinner {
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-top-color: rgba(255, 255, 255, 1);
+        border-radius: 9999px;
+        animation: spin 0.9s linear infinite;
+      }
+
+      @keyframes drift {
+        0%, 100% { transform: translate3d(0, 0, 0); }
+        50% { transform: translate3d(0, -12px, 0); }
+      }
+
+      @keyframes drift-alt {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+        50% { transform: translate3d(12px, 10px, 0) scale(1.02); }
+      }
+
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body class="min-h-screen text-white font-sans">
+    <main class="glass-grid relative isolate overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_42%)]"></div>
+      <div class="relative mx-auto flex min-h-screen max-w-7xl items-center px-6 py-12 sm:px-10 lg:px-12">
+        <div class="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:gap-16">
+          <section class="order-2 max-w-2xl lg:order-1">
+            <p class="mb-6 text-xs uppercase tracking-[0.45em] text-white/55">UpToDate</p>
+            <h1 class="max-w-xl font-display text-5xl leading-[0.95] text-white sm:text-6xl lg:text-7xl">
+              Get Started with UpToDate
+            </h1>
+            <p class="mt-6 max-w-lg text-sm leading-7 text-white/70 sm:text-base">
+              A focused, low-noise way to stay informed. Register for updates and we'll
+              connect you with your personal research agent.
+            </p>
+
+            <form
+              id="register-form"
+              class="mt-10 space-y-4 rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-halo backdrop-blur sm:p-7"
+            >
+              <label class="block">
+                <span class="mb-2 block text-xs uppercase tracking-[0.3em] text-white/50">Full Name</span>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  class="w-full rounded-full border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-white/30 focus:bg-white/[0.07]"
+                  placeholder="George Fortune"
+                />
+              </label>
+
+              <label class="block">
+                <span class="mb-2 block text-xs uppercase tracking-[0.3em] text-white/50">Phone Number</span>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  class="w-full rounded-full border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-white/30 focus:bg-white/[0.07]"
+                  placeholder="+234..."
+                />
+              </label>
+
+              <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
+                <button
+                  id="submit-button"
+                  type="submit"
+                  class="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-white px-7 text-sm font-medium text-black transition hover:bg-white/90 disabled:cursor-not-allowed disabled:bg-white/70"
+                >
+                  <span id="button-label">Register for Updates</span>
+                </button>
+                <div id="status-container" class="text-sm text-white/65 leading-relaxed" aria-live="polite"></div>
+              </div>
+            </form>
+          </section>
+
+          <section class="order-1 flex justify-center lg:order-2 lg:justify-end">
+            <div class="relative aspect-square w-full max-w-[540px]">
+              <svg class="wireframe absolute inset-0 h-full w-full" viewBox="0 0 600 600" fill="none">
+                <circle cx="300" cy="300" r="176" stroke="rgba(255,255,255,0.24)" stroke-width="1.2" />
+                <circle cx="300" cy="300" r="120" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
+                <circle cx="300" cy="300" r="70" stroke="rgba(255,255,255,0.20)" stroke-width="1.2" />
+                <polygon points="300,88 462,180 462,366 300,460 138,366 138,180" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" />
+                <circle cx="300" cy="300" r="10" fill="white" />
+              </svg>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const form = document.getElementById("register-form");
+      const submitButton = document.getElementById("submit-button");
+      const buttonLabel = document.getElementById("button-label");
+      const statusContainer = document.getElementById("status-container");
+
+      function setLoadingState(isLoading) {
+        submitButton.disabled = isLoading;
+        if (isLoading) {
+          buttonLabel.innerHTML = '<span class="spinner" aria-hidden="true"></span><span>Submitting...</span>';
+          statusContainer.textContent = "Processing...";
+        } else {
+          buttonLabel.textContent = "Register for Updates";
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const payload = {
+          name: String(formData.get("name") || "").trim(),
+          phone: String(formData.get("phone") || "").trim(),
+        };
+
+        setLoadingState(true);
+
+        try {
+          const response = await fetch(`${window.location.origin}/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(data.detail || "Unable to register right now.");
+          }
+
+          
+          const botUsername = "Uptodate_researchbot"; 
+          const telegramLink = `https://t.me/${botUsername}`;
+
+          statusContainer.innerHTML = `
+            <span style="color: #86efac">Registered!</span><br/>
+            <a href="${telegramLink}" target="_blank" class="font-bold underline hover:text-white transition-colors">
+              Click here to start the Telegram Bot
+            </a>
+          `;
+          form.reset();
+        } catch (error) {
+          statusContainer.textContent = error.message;
+          statusContainer.style.color = "#fca5a5";
+        } finally {
+          setLoadingState(false);
+        }
+      });
+    </script>
+  </body>
+</html>
