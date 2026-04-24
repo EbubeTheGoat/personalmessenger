@@ -199,8 +199,17 @@ def job_fetch_and_send():
                         db.commit()
                         logger.info(f"Delivered to {user.phone_number}")
                 else:
-                    logger.info(f"No new content for {user.phone_number}")
-
+                    logger.info(f"No new content for {user.phone_number}. Sending fallback message.")
+                    
+                    fallback_msg = (
+                        f"🕵️‍♂️ <b>Intelligence Agency Update: {user.notification_topic}</b>\n\n"
+                        f"I scanned the web today, but there is no new "
+                        f"information or breaking news to report since my last update.\n\n"
+                        f"I will keep monitoring!"
+                    )
+                    
+                    # Send it via Telegram using your existing function
+                    send_telegram(user.phone_number, fallback_msg)
         except Exception as e:
             sentry_sdk.capture_exception(e)
         finally:
