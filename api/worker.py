@@ -35,10 +35,11 @@ session = requests.Session()
 session.headers.update(SCRAPE_HEADERS)
 
 def search_web(query: str) -> list[str]:
-    """Uses SerpAPI to find the latest links on a topic."""
+  """Uses SerpAPI to find the latest links on a topic."""
     url = "https://serpapi.com/search.json"
     params = {
-        "q": query,
+        # This appends the exclusion rule directly to the user's search
+        "q": f"{query} -site:reddit.com -site:quora.com", 
         "api_key": SERPAPI_API_KEY,
         "engine": "google_news",
         "num": 6,
