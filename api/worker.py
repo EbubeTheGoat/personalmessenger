@@ -46,7 +46,7 @@ def search_web(query: str) -> list[str]:
         "tbs": "qdr:d" 
     }
     try:
-        response = session.get(url, params=params, timeout=10)
+        response = session.get(url, params=params, timeout=45)
         data = response.json()
         return [r["link"] for r in data.get("news_results", []) if "link" in r]
     except Exception as e:
