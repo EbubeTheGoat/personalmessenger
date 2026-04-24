@@ -16,3 +16,4 @@ tenacity
 apscheduler
 psycopg2-binary
 python-multipart
+numpy
