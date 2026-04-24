@@ -16,7 +16,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_excep
 # Absolute imports for Vercel
 from api.database import SessionLocal, User, SentContent
 import api.cache
-from newsduplicator import is_unique_message, store_hash, is_unique, cosine_similarity, store_embeddings
+from api.newsduplicator import is_unique_message, store_hash, is_unique, cosine_similarity, store_embeddings
 
 load_dotenv()
 
