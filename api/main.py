@@ -164,13 +164,16 @@ async def webhook(request: Request, db: Session = Depends(get_db)):
         if len(incoming) < 2:
             send_telegram(chat_id, "Please enter a valid topic to continue.")
             return {"status": "ok"}
+        elif incoming.lower() == "/start":
+            send_telegram(chat_id, "Please enter a topic to follow (e.g. 'Pharmacy AI', 'Crypto', 'Lagos Business').")
+            return {"status": "ok"}
 
         user.notification_topic = incoming
         user.current_step = "CONFIRMED"
         db.commit()
         api.cache.set_user_cache(chat_id, {"step": "CONFIRMED"})
 
-        confirm_msg = f"✅ Got it! You'll receive updates on <b>{incoming}</b> every 12 hours.\n\nReply 'change' anytime to update your topic."
+        confirm_msg = f"✅ Got it! You'll receive updates on <b>{incoming}</b> every 24 hours.\n\nReply 'change' anytime to update your topic."
         send_telegram(chat_id, confirm_msg)
         return {"status": "ok"}
 
