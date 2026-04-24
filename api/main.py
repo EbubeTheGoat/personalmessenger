@@ -9,6 +9,7 @@ from fastapi.responses import FileResponse, Response
 
 import sentry_sdk
 from sentry_sdk.integrations.fastapi import FastApiIntegration
+from api.database import engine
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
@@ -17,11 +18,12 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 # Internal absolute imports for Vercel
-from api.database import SessionLocal
+from api.database import Base, SessionLocal
 import api.database
 import api.cache
 from api.worker import job_fetch_and_send, send_telegram # Import your new Telegram sender
 
+Base.metadata.create_all(bind=engine)
 # --- Initialization ---
 
 sentry_sdk.init(
