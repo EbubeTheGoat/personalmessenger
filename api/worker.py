@@ -114,11 +114,8 @@ def run_ai_research(topic: str, seen_hashes: set) -> list[dict]:
     """Coordinates search and scraping while pre-filtering seen content."""
     # 1. Define 'Fast' sources (Reddit, Hacker News, Tech blogs)
     # You can customize this list!
-    fast_sources = "(site:reddit.com OR site:news.ycombinator.com OR site:techcrunch.com OR site:theverge.com)"
     
-    # 2. Merge topic with sources
-    # Example query: "AI Agents (site:reddit.com OR site:techcrunch.com...)"
-    optimized_query = f"{topic} {fast_sources}"
+    optimized_query = f"{topic}"
     
     urls = search_web(optimized_query)
     
