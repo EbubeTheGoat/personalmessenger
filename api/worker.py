@@ -35,6 +35,7 @@ session = requests.Session()
 session.headers.update(SCRAPE_HEADERS)
 
 def search_web(query: str) -> list[str]:
+    logger.info(f" Executing search for {query}")
     """Uses SerpAPI to find the latest links on a topic."""
     url = "https://serpapi.com/search.json"
     params = {
