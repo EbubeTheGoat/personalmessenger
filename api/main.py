@@ -173,7 +173,7 @@ async def webhook(request: Request, db: Session = Depends(get_db)):
         db.commit()
         api.cache.set_user_cache(chat_id, {"step": "CONFIRMED"})
 
-        confirm_msg = f"✅ Got it! You'll receive updates on <b>{incoming}</b> every 24 hours.\n\nReply 'change' anytime to update your topic."
+        confirm_msg = f"✅ Got it! You'll receive updates on <b>{incoming}</b> at 8:00 AM WAT.\n\nReply 'change' anytime to update your topic."
         send_telegram(chat_id, confirm_msg)
         return {"status": "ok"}
 
