@@ -43,9 +43,7 @@ def search_web(query: str) -> list[str]:
         "api_key": SERPAPI_API_KEY,
         "engine": "google_news",
         "num": 6,
-        "hl": "en",
-        "when": "7d",
-        "so" : "1"
+        "hl": "en"
     }
     try:
         response = session.get(url, params=params, timeout=45)
